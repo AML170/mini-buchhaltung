@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini-Buchhaltung</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1>Mini-Buchhaltung</h1>
+      <p class="app__subtitle">Einnahmen und Ausgaben im Blick behalten.</p>
+    </header>
+
+    <section class="uebersicht" aria-label="Übersicht">
+      <div class="karte karte--einnahmen">
+        <span class="karte__titel">Einnahmen</span>
+        <span id="summe-einnahmen" class="karte__wert">0,00&nbsp;€</span>
+      </div>
+      <div class="karte karte--ausgaben">
+        <span class="karte__titel">Ausgaben</span>
+        <span id="summe-ausgaben" class="karte__wert">0,00&nbsp;€</span>
+      </div>
+      <div class="karte karte--saldo">
+        <span class="karte__titel">Saldo</span>
+        <span id="saldo-anzeige" class="karte__wert">0,00&nbsp;€</span>
+      </div>
+    </section>
+
+    <form id="buchungs-formular" class="formular">
+      <input
+        type="text"
+        id="beschreibung-eingabe"
+        class="formular__eingabe"
+        placeholder="Beschreibung, z. B. Gehalt oder Miete..."
+        aria-label="Beschreibung der Buchung"
+        maxlength="120"
+        required
+      >
+      <input
+        type="number"
+        id="betrag-eingabe"
+        class="formular__betrag"
+        placeholder="Betrag"
+        aria-label="Betrag in Euro"
+        min="0.01"
+        step="0.01"
+        required
+      >
+      <div class="formular__zeile">
+        <select id="art-auswahl" class="formular__auswahl" aria-label="Art der Buchung">
+          <option value="einnahme" selected>Einnahme</option>
+          <option value="ausgabe">Ausgabe</option>
+        </select>
+        <select id="kategorie-auswahl" class="formular__auswahl" aria-label="Kategorie">
+          <option value="Gehalt">Gehalt</option>
+          <option value="Lebensmittel">Lebensmittel</option>
+          <option value="Miete">Miete</option>
+          <option value="Transport">Transport</option>
+          <option value="Freizeit" selected>Freizeit</option>
+          <option value="Sonstiges">Sonstiges</option>
+        </select>
+        <button type="submit" class="button button--primaer">Buchen</button>
+      </div>
+    </form>
+
+    <div class="filter">
+      <button class="filter__button ist-aktiv" aria-pressed="true" data-filter="alle">Alle</button>
+      <button class="filter__button" aria-pressed="false" data-filter="einnahme">Einnahmen</button>
+      <button class="filter__button" aria-pressed="false" data-filter="ausgabe">Ausgaben</button>
+    </div>
+
+    <ul id="buchungs-liste" class="liste"></ul>
+
+    <p id="leer-hinweis" class="leer-hinweis">Noch keine Buchungen. Erfasse deine erste Buchung!</p>
+
+    <section class="kategorien" aria-label="Ausgaben nach Kategorie">
+      <h2 class="kategorien__ueberschrift">Ausgaben nach Kategorie</h2>
+      <ul id="kategorien-liste" class="kategorien__liste"></ul>
+      <p id="kategorien-leer" class="kategorien__leer">Noch keine Ausgaben vorhanden.</p>
+    </section>
+
+    <p id="speicher-status" role="status"></p>
+    <footer class="app__fusszeile">
+      <span id="zaehler">0 Buchungen</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
