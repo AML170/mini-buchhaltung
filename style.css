@@ -1,0 +1,255 @@
+:root {
+  --farbe-hintergrund: #f4f5f7;
+  --farbe-karte: #ffffff;
+  --farbe-text: #1f2937;
+  --farbe-text-schwach: #6b7280;
+  --farbe-primaer: #2563eb;
+  --farbe-primaer-dunkel: #1d4ed8;
+  --farbe-einnahme: #047857;
+  --farbe-ausgabe: #b91c1c;
+  --farbe-rahmen: #e5e7eb;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--farbe-hintergrund);
+  color: var(--farbe-text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.app {
+  width: 100%;
+  max-width: 620px;
+  background: var(--farbe-karte);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  align-self: flex-start;
+}
+
+.app__header { margin-bottom: 1.25rem; }
+.app__header h1 { font-size: 1.5rem; }
+.app__subtitle { color: var(--farbe-text-schwach); font-size: 0.9rem; margin-top: 0.25rem; }
+
+.uebersicht {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.karte {
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.karte__titel {
+  font-size: 0.8rem;
+  color: var(--farbe-text-schwach);
+}
+
+.karte__wert {
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.karte--einnahmen .karte__wert { color: var(--farbe-einnahme); }
+.karte--ausgaben .karte__wert { color: var(--farbe-ausgabe); }
+.karte__wert.ist-negativ { color: var(--farbe-ausgabe); }
+.karte__wert.ist-positiv { color: var(--farbe-einnahme); }
+
+.formular {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.formular__zeile {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.formular__eingabe,
+.formular__betrag {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+}
+
+.formular__betrag { width: 9rem; }
+
+.formular__auswahl {
+  padding: 0.6rem;
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  background: var(--farbe-karte);
+  flex: 1;
+}
+
+.button {
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.button--primaer { background: var(--farbe-primaer); color: #fff; }
+.button--primaer:hover { background: var(--farbe-primaer-dunkel); }
+
+.filter {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter__button {
+  border: 1px solid var(--farbe-rahmen);
+  background: var(--farbe-karte);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.filter__button.ist-aktiv {
+  background: var(--farbe-primaer);
+  border-color: var(--farbe-primaer);
+  color: #fff;
+}
+
+.liste { list-style: none; }
+
+.buchung {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
+}
+
+.buchung__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.buchung__text { overflow-wrap: anywhere; }
+
+.buchung__meta {
+  font-size: 0.8rem;
+  color: var(--farbe-text-schwach);
+}
+
+.buchung__betrag {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.buchung__betrag--einnahme { color: var(--farbe-einnahme); }
+.buchung__betrag--ausgabe { color: var(--farbe-ausgabe); }
+
+.buchung__loeschen {
+  border: none;
+  background: transparent;
+  color: var(--farbe-text-schwach);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.buchung__loeschen:hover { color: var(--farbe-ausgabe); }
+
+.leer-hinweis {
+  text-align: center;
+  color: var(--farbe-text-schwach);
+  padding: 1.5rem 0;
+  display: none;
+}
+
+.leer-hinweis.ist-sichtbar { display: block; }
+
+.kategorien {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--farbe-rahmen);
+  padding-top: 1rem;
+}
+
+.kategorien__ueberschrift {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.kategorien__liste { list-style: none; }
+
+.kategorie { margin-bottom: 0.6rem; }
+
+.kategorie__kopf {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.kategorie__balken {
+  height: 0.5rem;
+  background: var(--farbe-rahmen);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.kategorie__fuellung {
+  height: 100%;
+  background: var(--farbe-primaer);
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.kategorien__leer {
+  color: var(--farbe-text-schwach);
+  font-size: 0.85rem;
+  display: none;
+}
+
+.kategorien__leer.ist-sichtbar { display: block; }
+
+.app__fusszeile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--farbe-text-schwach);
+}
+
+#speicher-status { color: #b91c1c; margin-top: 1rem; font-size: 0.875rem; }
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid #2563eb; outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  body { padding: 1rem 0.65rem; }
+  .app { padding: 1rem; }
+  .uebersicht { grid-template-columns: 1fr; }
+  .formular__zeile { flex-wrap: wrap; }
+  .formular__betrag { width: 100%; }
+}
