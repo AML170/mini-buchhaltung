@@ -1,29 +1,34 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini-Buchhaltung</title>
+  <title>Mini Accounting</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="app">
     <header class="app__header">
-      <h1>Mini-Buchhaltung</h1>
-      <p class="app__subtitle">Einnahmen und Ausgaben im Blick behalten.</p>
+      <div class="language" role="group" aria-label="Language / Sprache / اللغة">
+        <button class="language__button ist-aktiv" data-lang="en" aria-pressed="true">English</button>
+        <button class="language__button" data-lang="de" aria-pressed="false">Deutsch</button>
+        <button class="language__button" data-lang="ar" aria-pressed="false">العربية</button>
+      </div>
+      <h1 data-i18n="appTitle">Mini Accounting</h1>
+      <p class="app__subtitle" data-i18n="subtitle">Keep track of income and expenses.</p>
     </header>
 
-    <section class="uebersicht" aria-label="Übersicht">
+    <section class="uebersicht" aria-label="Overview">
       <div class="karte karte--einnahmen">
-        <span class="karte__titel">Einnahmen</span>
+        <span class="karte__titel" data-i18n="income">Income</span>
         <span id="summe-einnahmen" class="karte__wert">0,00&nbsp;€</span>
       </div>
       <div class="karte karte--ausgaben">
-        <span class="karte__titel">Ausgaben</span>
+        <span class="karte__titel" data-i18n="expenses">Expenses</span>
         <span id="summe-ausgaben" class="karte__wert">0,00&nbsp;€</span>
       </div>
       <div class="karte karte--saldo">
-        <span class="karte__titel">Saldo</span>
+        <span class="karte__titel" data-i18n="balance">Balance</span>
         <span id="saldo-anzeige" class="karte__wert">0,00&nbsp;€</span>
       </div>
     </section>
@@ -33,8 +38,9 @@
         type="text"
         id="beschreibung-eingabe"
         class="formular__eingabe"
-        placeholder="Beschreibung, z. B. Gehalt oder Miete..."
-        aria-label="Beschreibung der Buchung"
+        placeholder="Description, e.g. salary or rent..."
+        data-i18n-placeholder="descriptionPlaceholder"
+        aria-label="Booking description"
         maxlength="120"
         required
       >
@@ -42,48 +48,49 @@
         type="number"
         id="betrag-eingabe"
         class="formular__betrag"
-        placeholder="Betrag"
-        aria-label="Betrag in Euro"
+        placeholder="Amount"
+        data-i18n-placeholder="amountPlaceholder"
+        aria-label="Amount in euro"
         min="0.01"
         step="0.01"
         required
       >
       <div class="formular__zeile">
-        <select id="art-auswahl" class="formular__auswahl" aria-label="Art der Buchung">
-          <option value="einnahme" selected>Einnahme</option>
-          <option value="ausgabe">Ausgabe</option>
+        <select id="art-auswahl" class="formular__auswahl" aria-label="Booking type">
+          <option value="income" data-i18n="incomeOpt" selected>Income</option>
+          <option value="expense" data-i18n="expenseOpt">Expense</option>
         </select>
-        <select id="kategorie-auswahl" class="formular__auswahl" aria-label="Kategorie">
-          <option value="Gehalt">Gehalt</option>
-          <option value="Lebensmittel">Lebensmittel</option>
-          <option value="Miete">Miete</option>
-          <option value="Transport">Transport</option>
-          <option value="Freizeit" selected>Freizeit</option>
-          <option value="Sonstiges">Sonstiges</option>
+        <select id="kategorie-auswahl" class="formular__auswahl" aria-label="Category">
+          <option value="salary" data-i18n="cat.salary">Salary</option>
+          <option value="groceries" data-i18n="cat.groceries">Groceries</option>
+          <option value="rent" data-i18n="cat.rent">Rent</option>
+          <option value="transport" data-i18n="cat.transport">Transport</option>
+          <option value="leisure" data-i18n="cat.leisure" selected>Leisure</option>
+          <option value="other" data-i18n="cat.other">Other</option>
         </select>
-        <button type="submit" class="button button--primaer">Buchen</button>
+        <button type="submit" class="button button--primaer" data-i18n="book">Add booking</button>
       </div>
     </form>
 
     <div class="filter">
-      <button class="filter__button ist-aktiv" aria-pressed="true" data-filter="alle">Alle</button>
-      <button class="filter__button" aria-pressed="false" data-filter="einnahme">Einnahmen</button>
-      <button class="filter__button" aria-pressed="false" data-filter="ausgabe">Ausgaben</button>
+      <button class="filter__button ist-aktiv" aria-pressed="true" data-filter="alle" data-i18n="filterAll">All</button>
+      <button class="filter__button" aria-pressed="false" data-filter="income" data-i18n="filterIncome">Income</button>
+      <button class="filter__button" aria-pressed="false" data-filter="expense" data-i18n="filterExpense">Expenses</button>
     </div>
 
     <ul id="buchungs-liste" class="liste"></ul>
 
-    <p id="leer-hinweis" class="leer-hinweis">Noch keine Buchungen. Erfasse deine erste Buchung!</p>
+    <p id="leer-hinweis" class="leer-hinweis">No bookings yet. Add your first booking!</p>
 
-    <section class="kategorien" aria-label="Ausgaben nach Kategorie">
-      <h2 class="kategorien__ueberschrift">Ausgaben nach Kategorie</h2>
+    <section class="kategorien" aria-label="Expenses by category">
+      <h2 class="kategorien__ueberschrift" data-i18n="catTitle">Expenses by category</h2>
       <ul id="kategorien-liste" class="kategorien__liste"></ul>
-      <p id="kategorien-leer" class="kategorien__leer">Noch keine Ausgaben vorhanden.</p>
+      <p id="kategorien-leer" class="kategorien__leer" data-i18n="catEmpty">No expenses yet.</p>
     </section>
 
     <p id="speicher-status" role="status"></p>
     <footer class="app__fusszeile">
-      <span id="zaehler">0 Buchungen</span>
+      <span id="zaehler">0 bookings</span>
     </footer>
   </main>
 
