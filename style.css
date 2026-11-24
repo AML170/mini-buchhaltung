@@ -34,6 +34,28 @@ body {
 }
 
 .app__header { margin-bottom: 1.25rem; }
+
+.language {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.language__button {
+  border: 1px solid var(--farbe-rahmen);
+  background: var(--farbe-karte);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.language__button.ist-aktiv {
+  background: var(--farbe-primaer);
+  border-color: var(--farbe-primaer);
+  color: #fff;
+}
 .app__header h1 { font-size: 1.5rem; }
 .app__subtitle { color: var(--farbe-text-schwach); font-size: 0.9rem; margin-top: 0.25rem; }
 
@@ -244,6 +266,13 @@ body {
 
 button:focus-visible, input:focus-visible, select:focus-visible {
   outline: 3px solid #2563eb; outline-offset: 3px;
+}
+
+/* RTL: flex and grid flip with dir="rtl" automatically; keep numerals stable. */
+[dir="rtl"] .karte__wert,
+[dir="rtl"] .buchung__betrag {
+  direction: ltr;
+  text-align: end;
 }
 
 @media (max-width: 520px) {
